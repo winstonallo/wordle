@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 14:13:54 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:33:42 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,24 @@ void	check_misplaced(t_checker *a)
 	}
 }
 
-int	check_word(char *word, char *guess, t_data *data)
+int	check_word(char *word, char *guess, t_checker *node)
 {
-	data->checker.color = NULL;
-	data->checker.word = NULL;
-	data->checker.guess = NULL;
-	data->checker.color = strdup("wwwwww");
-	if (!data->checker.color)
+	node->color = NULL;
+	node->word = NULL;
+	node->guess = NULL;
+	node->color = strdup("wwwwww");
+	if (!node->color)
 		return (1);
-	data->checker.guess = strdup(guess);
-	if (!data->checker.guess)
+	node->guess = strdup(guess);
+	if (!node->guess)
 		return (1);
-	data->checker.word = strdup(word);
-	if (!data->checker.word)
+	node->word = strdup(word);
+	if (!node->word)
 		return (1);
-	if (check_correct(&data->checker))
+	if (check_correct(node))
 		return (CORRECT);
-	check_misplaced(&data->checker);
+	check_misplaced(node);
+	if (strncmp(node->color, "ggggg", 5) == 0)
+		return (CORRECT);
 	return (0);
 }

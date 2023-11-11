@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wordle.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 14:14:16 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:26:41 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ typedef struct s_words
 
 typedef struct s_checker
 {
-	char	*word;
-	char	*guess;
-	char	*color;
+	char				*word;
+	char				*guess;
+	char				*color;
+	struct s_checker	*next;
 }	t_checker;
 
 typedef struct s_data
@@ -41,15 +42,17 @@ typedef struct s_data
 	char			*todaysWord;
 	unsigned int	dictSize;
 	t_words			**words;
-	t_checker		checker;
+	t_checker		**checker;
+	char			**guesses;
 }	t_data;
 
-int			main();
+int 		main();
+int			playGame(t_data *data);
 int			readFile(t_data *data);
-int			printWord(t_data *data);
+int			printWord(t_checker *node);
 void		getTodaysWord(t_data *data);
 void		freeWords(t_words **words);
-int			check_word(char *word, char *guess, t_data *data);
+int			check_word(char *word, char *guess, t_checker *node);
 int			is_word(t_words *words, char *str);
 
 #endif
