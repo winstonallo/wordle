@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:13 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 11:39:28 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:06:22 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	wordAddBack(t_words **lst, t_words *new_node)
 	current->next = new_node;
 }
 
-static void	printWords(t_words **wordsList)
+void	printWords(t_words **wordsList)
 {
 	t_words	*head;
 
@@ -92,7 +92,6 @@ int	readFile(t_data *data)
 			return (free(temp), freeWords(data->words), fclose(file), 1);
 		wordAddBack(data->words, new);
 	}
-	printWords(data->words);
 	freeWords(data->words);
 	if (fclose(file) < 0)
 		return (fclose(file));

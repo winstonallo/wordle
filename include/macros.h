@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:52:21 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 10:54:33 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:14:45 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define GREEN "\x1b[42m"
 # define GREY "\x1b[100m"
 # define YELLOW "\x1b[103m"
-# define DEFAULT "\x1b[0m\n"
+# define DEFAULT "\x1b[0m"
+# define BOLD "\x1b[1m"
 
 #endif
