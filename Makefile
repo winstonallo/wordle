@@ -5,7 +5,9 @@ OBJ_DIR = obj
 SRC_DIR = src/
 
 SRCS = 	${SRC_DIR}wordle.c \
-		${SRC_DIR}readFile.c
+		${SRC_DIR}readFile.c \
+		${SRC_DIR}checker.c \
+		${SRC_DIR}game.c \
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
