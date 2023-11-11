@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wordle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 14:42:12 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:13:02 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ void	wipe(t_data *data)
 		free(data->checker.word);
 	if (data->checker.guess)
 		free(data->checker.guess);
-	if (data->todaysWord)
-		free(data->todaysWord);
+	if (data->todays_word)
+		free(data->todays_word);
 }
 
-int main()
+int	main(void)
 {
 	t_data		data;
-	
+
 	if (readFile(&data))
 		return (1);
 	if (check_word("yello", "yello", &data) == 1)
 		return (wipe(&data), 1);
 	getTodaysWord(&data);
-	check_word(data.todaysWord, "hello", &data);
+	check_word(data.todays_word, "hello", &data);
 	wipe(&data);
-    return 0;
+	return (0);
 }
