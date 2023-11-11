@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wordle.h                                           :+:      :+:    :+:   */
+/*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 10:53:59 by abied-ch         ###   ########.fr       */
+/*   Created: 2023/11/11 10:52:21 by abied-ch          #+#    #+#             */
+/*   Updated: 2023/11/11 10:54:33 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORDLE_H
-# define WORDLE_H
+#ifndef MACROS_H
+# define MACROS_H
 
-# include <stdio.h>
-# include "macros.h"
-
-int			main();
+# define GREEN "\x1b[42m"
+# define GREY "\x1b[100m"
+# define YELLOW "\x1b[103m"
+# define DEFAULT "\x1b[0m\n"
 
 #endif
