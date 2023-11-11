@@ -3,17 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 12:07:08 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:49:40 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//structure
-// char *word  "*****"
-// char *guess  "*****"
-// char *color  "wwwww" each for color . w-grey, g-green, y-yellow
 
 #include "../include/wordle.h"
 
@@ -21,7 +16,7 @@ int	check_correct(t_checker *a)
 {
 	int	i;
 	int	correct;
-	
+
 	i = 0;
 	correct = 0;
 	while (i < 5)
@@ -77,4 +72,17 @@ t_checker	check_word(char *word, char *guess)
 		return (a);
 	check_misplaced(&a);
 	return (a);
+}
+
+int	main(int argc, char **argv)
+{
+	t_checker a;
+
+	if (argc != 3)
+	{
+		return (1);
+	}
+	a = check_word(argv[1], argv[2]);
+	printf("%s", a.color);	
+	return (0);
 }
