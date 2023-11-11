@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 21:34:34 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/11 23:34:24 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 #include <stddef.h>
 #include <stdio.h>
 
-int	printGame(t_data *data)
+int	print_game(t_data *data)
 {
 	printf(BOLD);
     printf("                           /\\ \\ /\\_  \\           \n");
     printf(" __  __  __    ___   _ __  \\_\\ \\//\\  \\      __  \n");
-    printf("/\\ \\/\\ \\/\\ \\  / __`\\/\\`'__\\/'_`  \\  \\ \\ \\   /'__`\\\n");
-    printf("\\ \\ \\_/ \\_/ \\/\\ \\L\\  \\ \\ \\//\\  \\L \\ \\ \\_\\ \\_/\\  __/\n");
-    printf(" \\ \\___x___/'\\ \\____/\\  \\_ \\ \\___,_\\/ \\____\\ \\____\\\n");
+    printf("/\\ \\/\\ \\/\\ \\  / __`\\/\\`'__\\/");
+	printf("'_`  \\  \\ \\ \\   /'__`\\\n");
+    printf("\\ \\ \\_/ \\_/ \\/\\ \\L\\  \\ \\ \\//");
+	printf("\\  \\L \\ \\ \\_\\ \\_/\\  __/\n");
+	printf(" \\ \\___x___/'\\ \\____/\\  \\_ \\");
+    printf(" \\___,_\\/ \\____\\ \\____\\\n");
     printf("  \\/__//__/   \\/___/  \\/_/ \\/__,_ /\\/____/\\/____/\n");
 	printf(DEFAULT);
 	printf("%s", (*data->words)->word);
-    return 0;
+	return (0);
 }
-static t_checker	*newWord(char *guess, char *color, char *word)
+static t_checker	*newChecker(char *guess, char *color, char *word)
 {
 	t_checker	*new;
 
@@ -98,10 +101,9 @@ int	playGame(t_data *data)
 		else
 			printf("Try again lol\n");
 		scanf("%s", temp);
-		printf("\r");
 		tries++;
-		new = newWord(NULL, NULL, NULL);
-		if (check_word(data->todaysWord, temp, new) == CORRECT)
+		new = newChecker(NULL, NULL, NULL);
+		if (check_word(data->todays_word, temp, new) == CORRECT)
 			return (printf("You win!\n"), 0); checkerAddBack(data->checker, new);
 		head = *data->checker;
 		while (i < tries)
@@ -116,5 +118,5 @@ int	playGame(t_data *data)
 			i++;
 		}
 	}	
-	return (0);
+	return (printf("No attempts left\n"));
 }

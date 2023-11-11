@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   readFile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:13 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 14:25:37 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:31:46 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wordle.h"
-#include <limits.h>
-#include <string.h>
 
-static t_words	*newWord(char *name, int index)
+static t_words	*new_word(char *name, int index)
 {
 	t_words	*new;
 
@@ -29,7 +27,7 @@ static t_words	*newWord(char *name, int index)
 	return (new);
 }
 
-static void	wordAddBack(t_words **lst, t_words *new_node)
+static void	word_add_back(t_words **lst, t_words *new_node)
 {
 	t_words	*current;
 
@@ -44,15 +42,20 @@ static void	wordAddBack(t_words **lst, t_words *new_node)
 	current->next = new_node;
 }
 
-void	printWords(t_words **wordsList)
+void	print_words(t_words **wordsList)
 {
 	t_words	*head;
+	int		i;
 
 	head = *wordsList;
 	while (head)
 	{
-		for (int i = 0; head->word[i]; i++)
+		i = 0;
+		while (head->word[i])
+		{
 			printf("%c", head->word[i]);
+			i++;
+		}
 		head = head->next;
 	}
 }
@@ -74,7 +77,7 @@ void	freeWords(t_words **wordsList)
 			free(temp);
 		}
 		free(wordsList);
-	}	
+	}
 }
 
 int	readFile(t_data *data)
@@ -84,7 +87,9 @@ int	readFile(t_data *data)
 	int		index;
 	char	*temp;
 	char	*s;
-	FILE 	*file = fopen("words.txt", "r");
+	FILE	*file;
+
+	file = fopen("words.txt", "r");
 	if (!file)
 		return (perror("Error opening file"), 1);
 	data->words = malloc(sizeof(t_words));
@@ -95,18 +100,21 @@ int	readFile(t_data *data)
 	while ((s = fgets(buffer, sizeof(buffer), file)))
 	{
 		if (!s)
-			return (free(temp), freeWords(data->words), free(data->words), fclose(file), 1);
+			return (free(temp), freeWords(data->words),
+				free(data->words), fclose(file), 1);
 		temp = strdup(buffer);
 		if (!temp)
-			return (free(temp), freeWords(data->words), free(data->words), fclose(file), 1);
-		new = newWord(temp, index++);
+			return (free(temp), freeWords(data->words),
+				free(data->words), fclose(file), 1);
+		new = new_word(temp, index++);
 		if (!new)
-			return (free(temp), freeWords(data->words), free(data->words), fclose(file), 1);
-		wordAddBack(data->words, new);
+			return (free(temp), freeWords(data->words),
+				free(data->words), fclose(file), 1);
+		word_add_back(data->words, new);
 	}
 	if (!index)
 		return (fclose(file), 1);
-	data->dictSize = index;
+	data->dict_size = index;
 	if (fclose(file) < 0)
 		return (fclose(file));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 21:26:41 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/11 23:30:51 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ typedef struct s_words
 {
 	char			*word;
 	unsigned int	index;
-	struct s_words 	*next;
+	struct s_words	*next;
 }	t_words;
-
 
 typedef struct s_checker
 {
@@ -39,8 +38,8 @@ typedef struct s_checker
 
 typedef struct s_data
 {
-	char			*todaysWord;
-	unsigned int	dictSize;
+	char			*todays_word;
+	unsigned int	dict_size;
 	t_words			**words;
 	t_checker		**checker;
 	char			**guesses;
@@ -51,7 +50,7 @@ int			playGame(t_data *data);
 int			readFile(t_data *data);
 int			printWord(t_checker *node);
 void		getTodaysWord(t_data *data);
-void		freeWords(t_words **words);
+void		freeWords(t_words **wordsList);
 int			check_word(char *word, char *guess, t_checker *node);
 int			is_word(t_words *words, char *str);
 
