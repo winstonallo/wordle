@@ -6,13 +6,13 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:13 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 12:06:22 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:50:43 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wordle.h"
 
-static t_words	*newWord(char *name)
+static t_words	*newWord(char *name, int index)
 {
 	t_words	*new;
 
@@ -22,6 +22,7 @@ static t_words	*newWord(char *name)
 	if (!new)
 		return (NULL);
 	new->word = name;
+	new->index = index;
 	new->next = NULL;
 	return (new);
 }
@@ -54,7 +55,7 @@ void	printWords(t_words **wordsList)
 	}
 }
 
-static void	freeWords(t_words **wordsList)
+void	freeWords(t_words **wordsList)
 {
 	t_words	*head;
 	t_words	*temp;
@@ -74,6 +75,7 @@ int	readFile(t_data *data)
 {
 	t_words	*new;
 	char	buffer[10000];
+	int		index;
 	char	*temp;
 	FILE 	*file = fopen("words.txt", "r");
 	if (!file)
@@ -82,17 +84,18 @@ int	readFile(t_data *data)
 	if (!data->words)
 		return (fclose(file), 1);
 	*data->words = NULL;
+	index = 0;
 	while (fgets(buffer, sizeof(buffer), file))
 	{
 		temp = strndup(buffer, 6);
 		if (!temp)
 			return (free(temp), freeWords(data->words), fclose(file), 1);
-		new = newWord(temp);
+		new = newWord(temp, index++);
 		if (!new)
 			return (free(temp), freeWords(data->words), fclose(file), 1);
 		wordAddBack(data->words, new);
 	}
-	freeWords(data->words);
+	data->dictSize = index;
 	if (fclose(file) < 0)
 		return (fclose(file));
 	return (0);

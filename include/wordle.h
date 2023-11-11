@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 12:14:16 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:55:00 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 # include <stdlib.h>
 # include <string.h>
 # include <ctype.h>
+# include <time.h>
 
 # include "macros.h"
 
 typedef struct s_words
 {
 	char			*word;
+	unsigned int	index;
 	struct s_words 	*next;
 }	t_words;
 
@@ -36,6 +38,8 @@ typedef struct s_checker
 
 typedef struct s_data
 {
+	char			*todaysWord;
+	unsigned int	dictSize;
 	t_words			**words;
 	t_checker		checker;
 }	t_data;
@@ -44,5 +48,8 @@ int			main();
 int			readFile(t_data *data);
 t_checker	check_word(char *word, char *guess);
 int			printWord(t_data *data);
+void		getTodaysWord(t_data *data);
+void		freeWords(t_words **words);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 12:18:27 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:47:49 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int main()
 	
 	readFile(&data);
 	data.checker = check_word("yello", "yello");
-	printWord(&data);
+	//printWord(&data);
+	getTodaysWord(&data);
+	freeWords(data.words);
     return 0;
 }
