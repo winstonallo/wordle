@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:13 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 11:34:31 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:39:28 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,21 @@ int	readFile(t_data *data)
 		return (perror("Error opening file"), 1);
 	data->words = malloc(sizeof(t_words));
 	if (!data->words)
-		return (1);
+		return (fclose(file), 1);
 	*data->words = NULL;
 	while (fgets(buffer, sizeof(buffer), file))
 	{
 		temp = strndup(buffer, 6);
 		if (!temp)
-			return (1);
+			return (free(temp), freeWords(data->words), fclose(file), 1);
 		new = newWord(temp);
 		if (!new)
-			return (1);
+			return (free(temp), freeWords(data->words), fclose(file), 1);
 		wordAddBack(data->words, new);
 	}
 	printWords(data->words);
 	freeWords(data->words);
-	fclose(file);
+	if (fclose(file) < 0)
+		return (fclose(file));
 	return (0);
 }
