@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 13:19:56 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:14:16 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int			printWord(t_data *data);
 void		getTodaysWord(t_data *data);
 void		freeWords(t_words **words);
 int			check_word(char *word, char *guess, t_data *data);
+int			is_word(t_words *words, char *str);
 
 #endif
