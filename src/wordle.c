@@ -6,22 +6,16 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 10:55:33 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:33:17 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wordle.h"
 
-int main() 
+int main()
 {
-    printf(GREEN);
-    printf("Green Background");
-    printf(DEFAULT);
-    printf(GREY);
-    printf("Grey Background");
-    printf(DEFAULT);
-    printf(YELLOW);
-    printf("Yellow Background");
-    printf(DEFAULT);
+	t_data	data;
+	
+	readFile(&data);
     return 0;
 }
