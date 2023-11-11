@@ -6,11 +6,13 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:13 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 12:50:43 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:11:24 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wordle.h"
+#include <limits.h>
+#include <string.h>
 
 static t_words	*newWord(char *name, int index)
 {
@@ -60,15 +62,19 @@ void	freeWords(t_words **wordsList)
 	t_words	*head;
 	t_words	*temp;
 
-	head = *wordsList;
-	while (head)
+	if (*wordsList)
 	{
-		temp = head;
-		free(head->word);
-		head = head->next;
-		free(temp);
-	}
-	free(wordsList);
+		head = *wordsList;
+		while (head)
+		{
+			temp = head;
+			if (head->word)
+				free(head->word);
+			head = head->next;
+			free(temp);
+		}
+		free(wordsList);
+	}	
 }
 
 int	readFile(t_data *data)
@@ -77,6 +83,7 @@ int	readFile(t_data *data)
 	char	buffer[10000];
 	int		index;
 	char	*temp;
+	char	*s;
 	FILE 	*file = fopen("words.txt", "r");
 	if (!file)
 		return (perror("Error opening file"), 1);
@@ -85,9 +92,11 @@ int	readFile(t_data *data)
 		return (fclose(file), 1);
 	*data->words = NULL;
 	index = 0;
-	while (fgets(buffer, sizeof(buffer), file))
+	while ((s = fgets(buffer, sizeof(buffer), file)))
 	{
-		temp = strndup(buffer, 6);
+		if (!s)
+			return (free(temp), freeWords(data->words), fclose(file), 1);
+		temp = strdup(buffer);
 		if (!temp)
 			return (free(temp), freeWords(data->words), fclose(file), 1);
 		new = newWord(temp, index++);
@@ -95,6 +104,8 @@ int	readFile(t_data *data)
 			return (free(temp), freeWords(data->words), fclose(file), 1);
 		wordAddBack(data->words, new);
 	}
+	if (!index)
+		return (fclose(file), 1);
 	data->dictSize = index;
 	if (fclose(file) < 0)
 		return (fclose(file));

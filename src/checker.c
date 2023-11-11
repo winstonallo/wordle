@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 12:49:40 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/11 13:58:34 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,22 @@ void	check_misplaced(t_checker *a)
 	}
 }
 
-t_checker	check_word(char *word, char *guess)
+int	check_word(char *word, char *guess, t_data *data)
 {
-	t_checker	a;
-
-	a.color = malloc(6);
-	a.guess = malloc(6);
-	a.word = malloc(6);
-	strcpy(a.color, "wwwww");
-	strcpy(a.word, word);
-	strcpy(a.guess, guess);
-	if (check_correct(&a))
-		return (a);
-	check_misplaced(&a);
-	return (a);
-}
-
-int	main(int argc, char **argv)
-{
-	t_checker a;
-
-	if (argc != 3)
-	{
+	data->checker.color = NULL;
+	data->checker.word = NULL;
+	data->checker.guess = NULL;
+	data->checker.color = strdup("wwwwww");
+	if (!data->checker.color)
 		return (1);
-	}
-	a = check_word(argv[1], argv[2]);
-	printf("%s", a.color);	
+	data->checker.guess = strdup(guess);
+	if (!data->checker.guess)
+		return (1);
+	data->checker.word = strdup(word);
+	if (!data->checker.word)
+		return (1);
+	if (check_correct(&data->checker))
+		return (CORRECT);
+	check_misplaced(&data->checker);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 12:55:00 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:19:56 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@ typedef struct s_data
 
 int			main();
 int			readFile(t_data *data);
-t_checker	check_word(char *word, char *guess);
 int			printWord(t_data *data);
 void		getTodaysWord(t_data *data);
 void		freeWords(t_words **words);
-
+int			check_word(char *word, char *guess, t_data *data);
 
 #endif
