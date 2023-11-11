@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 23:34:24 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/11 23:37:38 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ int	playGame(t_data *data)
 		tries++;
 		new = newChecker(NULL, NULL, NULL);
 		if (check_word(data->todays_word, temp, new) == CORRECT)
-			return (printf("You win!\n"), 0); checkerAddBack(data->checker, new);
+			return (printWord(new), printf("You win!\n"), 0);
+		checkerAddBack(data->checker, new);
 		head = *data->checker;
 		while (i < tries)
 		{
