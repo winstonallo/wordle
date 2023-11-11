@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 11:38:21 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/11 11:38:43 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_correct(t_checker *a)
 		if (a->word[i] == a->guess[i])
 		{
 			a->color[i] = 'g';
-			corect++;
+			correct++;
 		}
 		i++;
 	}
