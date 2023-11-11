@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 13:56:31 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:23:44 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	wipe(t_data *data)
 		free(data->checker.word);
 	if (data->checker.guess)
 		free(data->checker.guess);
+	if (data->todaysWord)
+		free(data->todaysWord);
 }
 
 int main()

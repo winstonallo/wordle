@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:13 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 14:11:24 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:25:37 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ int	readFile(t_data *data)
 	while ((s = fgets(buffer, sizeof(buffer), file)))
 	{
 		if (!s)
-			return (free(temp), freeWords(data->words), fclose(file), 1);
+			return (free(temp), freeWords(data->words), free(data->words), fclose(file), 1);
 		temp = strdup(buffer);
 		if (!temp)
-			return (free(temp), freeWords(data->words), fclose(file), 1);
+			return (free(temp), freeWords(data->words), free(data->words), fclose(file), 1);
 		new = newWord(temp, index++);
 		if (!new)
-			return (free(temp), freeWords(data->words), fclose(file), 1);
+			return (free(temp), freeWords(data->words), free(data->words), fclose(file), 1);
 		wordAddBack(data->words, new);
 	}
 	if (!index)
