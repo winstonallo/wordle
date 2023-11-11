@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 11:35:34 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/11 11:38:21 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_checker
 int	check_correct(t_checker *a)
 {
 	int	i;
+	int	correct;
 
 	i = 0;
 	while (i < 5)
@@ -34,9 +35,11 @@ int	check_correct(t_checker *a)
 		if (a->word[i] == a->guess[i])
 		{
 			a->color[i] = 'g';
+			corect++;
 		}
 		i++;
 	}
+	return (correct == 5);
 }
 
 void	check_misplaced(t_checker *a)
