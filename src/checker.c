@@ -6,25 +6,11 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 12:45:12 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/11 12:49:40 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//structure
-// char *word  "*****"
-// char *guess  "*****"
-// char *color  "wwwww" each for color . w-grey, g-green, y-yellow
-
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct s_checker
-{
-	char	*word;
-	char	*guess;
-	char	*color;
-}	t_checker;
+#include "../include/wordle.h"
 
 int	check_correct(t_checker *a)
 {
