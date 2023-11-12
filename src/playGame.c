@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playGame.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 15:30:16 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 15:33:29 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	printWordle(void)
 	printf("                            by abied-ch and jkoupy\n\n");
 	printf(DEFAULT);
 	printf(BOLD_MAGENTA);
-	printf("            Welcome to the game of Worlde.\n");
+	printf("            Welcome to the game of Wordle.\n");
 	printf("     You have 6 guesses to guess the word of today.\n\n");
 	printf(DEFAULT);
 	return (0);
