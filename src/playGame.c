@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playGame.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 14:42:11 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:30:16 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	printProgress(t_checker *head, int tries)
 		printf("\n                   _  _  _  _  _  \n");	
 		i++;
 	}
-	printf("\n");
 }
 
 int	youWin(t_checker *head, int tries)
@@ -125,7 +124,7 @@ int	youWin(t_checker *head, int tries)
 	i = 0;
 	printProgress(head, tries);
 	printf(BOLD);
-	printf("\n                🎉🎉 You win! 🎉🎉");
+	printf("\n                🎉🎉 You win! 🎉🎉\n\n");
 	printf(DEFAULT);
 	return (0);
 }
@@ -157,17 +156,23 @@ int	playGame(t_data *data)
 		printWordle();
 		if (first == 1)
 		{
+			printf(BOLD_MAGENTA);
 			printf("                  Enjoy the game!\n\n");
+			printf(DEFAULT);
 			first = 0;
 		}
 		else if (strlen(temp) != 5)
 		{
+			printf(BOLD_RED);
 			printf("               Wrong length of a word\n\n");
+			printf(DEFAULT);
 			error = 1;
 		}
 		else if (!is_word(*data->words, temp))
 		{
-			printf("                     Not a word\n\n");
+			printf(BOLD_RED);
+			printf("                    Not a word!\n\n");
+			printf(DEFAULT);
 			error = 1;
 		}
 		else
@@ -178,8 +183,18 @@ int	playGame(t_data *data)
 			if (!new)
 				return (perror("memory allocation failed"), 1);
 			result = check_word(data->todaysWord, temp, new);
-			if (result == 1)
-				return (1);
+			if (result == CORRECT)
+			{
+				printf(BOLD_GREEN);
+				printf("\n                     Congrats!   \n\n");
+				printf(DEFAULT);
+			}
+			else
+			{
+				printf(BOLD_RED);
+				printf("             Good guess but not the word\n\n");
+				printf(DEFAULT);
+			}
 			checkerAddBack(data->checker, new);
 			head = *data->checker;
 			if (result == CORRECT)
@@ -197,8 +212,16 @@ int	playGame(t_data *data)
 			printf("\n                Try again: ");
 		if (scanf("%6s", temp) != 1)
 			return (1);
+		for (int a = 0; a < 5; a++)
+			temp[a] = tolower(temp[a]);
 	}	
-	return (printf(BOLD), printf("\n                    Game Over!\n"), printf(DEFAULT));
+	return (printf(BOLD), printf("\n                     Game Over!\n\n"), printf(DEFAULT));
+}
+
+void wortToLower(char *word)
+{
+	for (int i = 0; i < 5; i++)
+		word[i] = tolower(word[i]);
 }
 
 void wordPrinter(t_checker *head, int tries)
