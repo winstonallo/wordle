@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 10:37:51 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 10:45:39 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,11 @@ int	playGame(t_data *data)
 			printf("            Wrong length of a word\n\n");
 			continue ;
 		}
-		if (!is_word(*data->words, temp))
+		/* if (!is_word(*data->words, temp))
 		{
 			printf("            Not a word\n\n");
 			continue ;
-		}
+		} */
 		tries++;
 		new = newChecker(NULL, NULL, NULL);
 		check_word(data->todays_word, temp, new);
