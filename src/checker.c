@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/12 09:25:01 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 10:53:11 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	check_correct(t_checker *a)
 
 void	check_misplaced(t_checker *a)
 {
-	int	i;
-	int	j;
+	int	i; //word
+	int	j; //guess
 
 	i = 0;
 	while (i < 5)
@@ -47,7 +47,7 @@ void	check_misplaced(t_checker *a)
 				j++;
 				continue ;
 			}
-			if (a->word[i] == a->guess[j])
+			if (a->word[i] == a->guess[j] && a->color[i] != 'g')
 			{
 				a->color[j] = 'y';
 				break ;
