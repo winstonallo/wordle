@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getTodaysWord.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 12:31:52 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 11:38:14 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 14:22:17 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  * @return an unsigned integer, which is the calculated 
  * hash value for the given key and length.
  */
-unsigned int	hash(const char *key, size_t length)
+static unsigned int	hash(const char *key, size_t length)
 {
 	unsigned int	hash;
 	size_t			i;
@@ -51,31 +51,31 @@ unsigned int	hash(const char *key, size_t length)
  * The function dailyHash takes a date string in the format 
  * "day month year" and returns a hash value
  * based on the concatenated date.*/
-unsigned int	daily_hash(const char *date_string)
+static unsigned int	dailyHash(const char *dateString)
 {
 	char	day[3];
 	char	month[4];
 	char	year[5];
-	char	concatenated_date[12];
+	char	concatenatedDate[12];
 
-	sscanf(date_string, "%s %s %s", day, month, year);
+	sscanf(dateString, "%s %s %s", day, month, year);
 	//get day, month and year from the ctime string
-	snprintf(concatenated_date, sizeof(concatenated_date),
+	snprintf(concatenatedDate, sizeof(concatenatedDate),
 		"%s%s%s", year, month, day);
 	//concatenate to "yyyymmdd"
-	return (hash(concatenated_date, strlen(concatenated_date)));
+	return (hash(concatenatedDate, strlen(concatenatedDate)));
 }
 
-void	get_word(t_data *data, unsigned int hash_value)
+static void	getWord(t_data *data, unsigned int hashValue)
 {
 	t_words	*head;
 
 	head = *data->words;
 	while (head)
 	{
-		if (head->index == hash_value)
+		if (head->index == hashValue)
 		{
-			data->todays_word = head->word;
+			data->todaysWord = head->word;
 			return ;
 		}
 		head = head->next;
@@ -85,10 +85,10 @@ void	get_word(t_data *data, unsigned int hash_value)
 void	getTodaysWord(t_data *data)
 {
 	time_t			timer;
-	unsigned int	hash_value;
+	unsigned int	hashValue;
 
 	time(&timer);
-	data->todays_word = ctime(&timer);
-	hash_value = daily_hash(data->todays_word) % data->dict_size;
-	get_word(data, hash_value);
+	data->todaysWord = ctime(&timer);
+	hashValue = dailyHash(data->todaysWord) % data->dictSize;
+	getWord(data, hashValue);
 }

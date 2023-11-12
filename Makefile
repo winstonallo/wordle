@@ -7,9 +7,8 @@ SRC_DIR = src/
 SRCS = 	${SRC_DIR}wordle.c \
 		${SRC_DIR}readFile.c \
 		${SRC_DIR}checker.c \
-		${SRC_DIR}game.c \
+		${SRC_DIR}playGame.c \
 		${SRC_DIR}getTodaysWord.c \
-		${SRC_DIR}readInput.c \
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
@@ -47,5 +46,8 @@ generate_test:
 
 test: all
 	clear; valgrind --leak-check=full --track-origins=yes --track-fds=yes --show-reachable=yes --show-leak-kinds=all --error-limit=no ./$(NAME)
+
+run: all
+	clear; ./$(NAME)
 
 child_test: all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:52:21 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 11:46:11 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 13:40:40 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # define GREEN "\x1b[42m"
 # define GREY "\x1b[100m"
 # define YELLOW "\x1b[103m"
-# define DEFAULT "\x1b[0m"
 # define BOLD "\x1b[1m"
 # define RED "\033[31m"
 # define BLUE "\033[34m"
@@ -31,6 +30,8 @@
 # define BOLD_WHITE "\033[1m\033[37m"
 # define BOLD_BLACK "\033[1m\033[30m"
 # define BOLD_GREEN "\033[1m\033[32m"
+
+# define DEFAULT "\x1b[0m"
 
 # define CORRECT 6969
 

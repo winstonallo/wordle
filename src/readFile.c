@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   readFile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:30:13 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/11 23:31:46 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 14:20:55 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wordle.h"
 
-static t_words	*new_word(char *name, int index)
+static t_words	*newWord(char *name, int index)
 {
 	t_words	*new;
 
@@ -27,7 +27,7 @@ static t_words	*new_word(char *name, int index)
 	return (new);
 }
 
-static void	word_add_back(t_words **lst, t_words *new_node)
+static void	wordAddBack(t_words **lst, t_words *new_node)
 {
 	t_words	*current;
 
@@ -40,24 +40,6 @@ static void	word_add_back(t_words **lst, t_words *new_node)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = new_node;
-}
-
-void	print_words(t_words **wordsList)
-{
-	t_words	*head;
-	int		i;
-
-	head = *wordsList;
-	while (head)
-	{
-		i = 0;
-		while (head->word[i])
-		{
-			printf("%c", head->word[i]);
-			i++;
-		}
-		head = head->next;
-	}
 }
 
 void	freeWords(t_words **wordsList)
@@ -80,6 +62,15 @@ void	freeWords(t_words **wordsList)
 	}
 }
 
+/**
+ * The function `readFile` reads words from a file, stores them in a linked list, and returns an error
+ * code if any errors occur.
+ * 
+ * @param data A pointer to a structure of type t_data.
+ * 
+ * @return an integer value. If the function is successful, it will return 0. If there is an error, it
+ * will return 1.
+ */
 int	readFile(t_data *data)
 {
 	t_words	*new;
@@ -106,15 +97,15 @@ int	readFile(t_data *data)
 		if (!temp)
 			return (free(temp), freeWords(data->words),
 				free(data->words), fclose(file), 1);
-		new = new_word(temp, index++);
+		new = newWord(temp, index++);
 		if (!new)
 			return (free(temp), freeWords(data->words),
 				free(data->words), fclose(file), 1);
-		word_add_back(data->words, new);
+		wordAddBack(data->words, new);
 	}
 	if (!index)
 		return (fclose(file), 1);
-	data->dict_size = index;
+	data->dictSize = index;
 	if (fclose(file) < 0)
 		return (fclose(file));
 	return (0);

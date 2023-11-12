@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/12 12:37:06 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 14:14:08 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wordle.h"
+
+int	is_word(t_words *words, char *str)
+{
+	while (words)
+	{
+		if (strncmp(words->word, str, 5) == 0)
+			return (1);
+		words = words->next;
+	}
+	return (0);
+}
 
 int	check_correct(t_checker *a)
 {

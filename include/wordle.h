@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wordle.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 12:11:18 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 14:20:28 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_checker
 
 typedef struct s_data
 {
-	char			*todays_word;
-	unsigned int	dict_size;
+	char			*todaysWord;
+	unsigned int	dictSize;
 	t_words			**words;
 	t_checker		**checker;
 	char			**guesses;
@@ -56,6 +56,6 @@ void		freeChecker(t_checker **checker);
 int			check_word(char *word, char *guess, t_checker *node);
 int			is_word(t_words *words, char *str);
 
-void		word_printer(t_checker *head, int tries);
+void		wordPrinter(t_checker *head, int tries);
 
 #endif
