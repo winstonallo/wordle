@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 10:45:39 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 11:46:54 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,26 +97,42 @@ int	playGame(t_data *data)
 		if (tries == -1)
 		{
 			printf(BOLD);
-			printf("            Welcome to the game of Worlde,\n");
+			printf("            Welcome to the game of Wordle,\n");
 			printf("     you have 6 guesses to guess the word of today.\n\n");
 			printf(DEFAULT);
 			printf("               Guess the word: ");
 			tries++;
 		}
 		else
-			printf("                Try again lol: ");
+		{
+			printf(BOLD);
+			printf("               You have ");
+			printf(BOLD_GREEN);
+			printf("%d", 6 - tries);
+			printf(DEFAULT);
+			printf(BOLD);
+			printf(" attempts left.\n\n");
+			printf(DEFAULT);
+			printf("               Guess the word: ");	
+		}
 		scanf("%6s", temp);
 		
 		if (strlen(temp) != 5)
 		{
-			printf("            Wrong length of a word\n\n");
+			printf(RED);
+			printf(BOLD);
+			printf("               Wrong length of a word\n\n");
+			printf(DEFAULT);
 			continue ;
 		}
-		/* if (!is_word(*data->words, temp))
+		if (!is_word(*data->words, temp))
 		{
-			printf("            Not a word\n\n");
+			printf(RED);
+			printf(BOLD);
+			printf("\n               Not a word\n\n");
+			printf(DEFAULT);
 			continue ;
-		} */
+		}
 		tries++;
 		new = newChecker(NULL, NULL, NULL);
 		check_word(data->todays_word, temp, new);
@@ -136,5 +152,5 @@ int	playGame(t_data *data)
 		if (check_word(data->todays_word, temp, new) == CORRECT)
 			return (printf(BOLD), printf("                      You win!\n"), printf(DEFAULT), 0);
 	}	
-	return (printf("                    No attempts left\n"));
+	return (printf("\n             No attempts left\n"));
 }
