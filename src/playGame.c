@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 15:33:29 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/12 23:36:27 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
+
 
 int	printWordle(void)
 {
@@ -31,6 +32,8 @@ int	printWordle(void)
 	printf(BOLD_MAGENTA);
 	printf("            Welcome to the game of Wordle.\n");
 	printf("     You have 6 guesses to guess the word of today.\n\n");
+	printf(BOLD_BLACK);
+	printf("            Press ctrl+D to exit the game\n\n");
 	printf(DEFAULT);
 	return (0);
 }
@@ -138,7 +141,6 @@ void	printAttemptsLeft(int tries)
 
 int	playGame(t_data *data)
 {
-	int			tries = 0;
 	t_checker	*new;
 	t_checker	*head;
 	char		temp[8];
@@ -146,11 +148,8 @@ int	playGame(t_data *data)
 	int			error = 0;
 	int			result = 0;
 
-	data->checker = malloc(sizeof(t_checker));
-	if (!data->checker)
-		return (1);
-	*data->checker = NULL;
-	while (tries < 6)
+	data->tries = 0;
+	while (data->tries < 6)
 	{
 		system("clear");
 		printWordle();
@@ -178,7 +177,7 @@ int	playGame(t_data *data)
 		else
 		{
 			error = 0;
-			tries++;
+			data->tries++;
 			new = newChecker(NULL, NULL, NULL);
 			if (!new)
 				return (perror("memory allocation failed"), 1);
@@ -198,15 +197,15 @@ int	playGame(t_data *data)
 			checkerAddBack(data->checker, new);
 			head = *data->checker;
 			if (result == CORRECT)
-				return(youWin(head, tries));
+				return(youWin(head, data->tries));
 		}
-		printAttemptsLeft(tries);
-		printProgress(head, tries);
-		if (tries != 0 && !error && result == CORRECT)
+		printAttemptsLeft(data->tries);
+		printProgress(head, data->tries);
+		if (data->tries != 0 && !error && result == CORRECT)
 			return (printf(BOLD), printf("\n               Hope you enjoyed! "), printf(DEFAULT), 0);
-		if (tries == 0)
+		if (data->tries == 0)
 			printf("\n               Guess the word: ");
-		else if (tries == 6)
+		else if (data->tries == 6)
 			break ;
 		else
 			printf("\n                Try again: ");
