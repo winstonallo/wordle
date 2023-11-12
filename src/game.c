@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 12:06:18 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 12:11:07 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 int	printWordle(void)
 {
-	printf(BOLD);
-	printf("                             __   ___\n");
+	printf("\n                             __   ___\n");
 	printf("                            /\\ \\ /\\_ \\\n");
 	printf("  __  __  __    ___   _ __  \\_\\ \\\\//\\ \\      __\n");
 	printf(" /\\ \\/\\ \\/\\ \\  / __`\\/\\`'__\\/'_` \\ \\ \\ \\   /'__`\\\n");
@@ -25,7 +24,6 @@ int	printWordle(void)
 	printf("  \\ \\___x___/'\\ \\____/\\ \\_\\\\ \\___,_\\/\\____\\ \\____\\\n");
 	printf("   \\/__//__/   \\/___/  \\/_/ \\/__,_ /\\/____/\\/____/\n");
 	printf("                            by abied-ch and jkoupy\n\n");
-	printf(DEFAULT);
 	return (0);
 }
 static t_checker	*newChecker(char *guess, char *color, char *word)
@@ -78,7 +76,7 @@ void	freeChecker(t_checker **checker)
 
 int	printWord(t_checker *node)
 {
-	printf("\n                     ");
+	printf("\n                  ");
 	for (size_t i = 0; node->guess[i]; i++)
 	{
 		printf(BOLD);
@@ -88,9 +86,7 @@ int	printWord(t_checker *node)
 			printf(GREEN);
 		if (node->color[i] == 'y')
 			printf(YELLOW);
-		printf("%c", toupper(node->guess[i]));
-		if (i < strlen(node->guess) - 1)
-			printf(" ");
+		printf(" %c ", toupper(node->guess[i]));
 		printf(DEFAULT);
 	}
 	printf("\n");
@@ -99,77 +95,84 @@ int	printWord(t_checker *node)
 
 int	playGame(t_data *data)
 {
-	int			tries;
+	int			tries = 0;
 	int 		i;
 	t_checker	*new;
 	t_checker	*head;
 	char		temp[8];
+	int			first = 1;
+	int			error = 0;
+	int			result = 0;
 
-	tries = -1;
 	data->checker = malloc(sizeof(t_checker));
 	if (!data->checker)
 		return (1);
 	*data->checker = NULL;
 	while (tries < 6)
 	{
-		i = 0;
-		if (tries == -1)
+		printf(BOLD);
+		printWordle();
+		printf("            Welcome to the game of Worlde.\n");
+		printf("     You have 6 guesses to guess the word of today.\n\n");
+		printf(DEFAULT);
+		if (first == 1)
 		{
-			printf(BOLD);
-			printf("            Welcome to the game of Wordle,\n");
-			printf("     you have 6 guesses to guess the word of today.\n\n");
-			printf(DEFAULT);
-			printf("               Guess the word: ");
-			tries++;
+			printf("                  Enjoy the game!\n\n");
+			first = 0;
+		}
+		else if (strlen(temp) != 5)
+		{
+			printf("               Wrong length of a word\n\n");
+			error = 1;
+		}
+		else if (!is_word(*data->words, temp))
+		{
+			printf("                     Not a word\n\n");
+			error = 1;
 		}
 		else
 		{
-			printf(BOLD);
-			printf("               You have ");
-			printf(BOLD_GREEN);
-			printf("%d", 6 - tries);
-			printf(DEFAULT);
-			printf(BOLD);
-			printf(" attempts left.\n\n");
-			printf(DEFAULT);
-			printf("               Guess the word: ");	
+			error = 0;
+			tries++;
+			new = newChecker(NULL, NULL, NULL);
+			result = check_word(data->todays_word, temp, new);
+			checkerAddBack(data->checker, new);
+			head = *data->checker;
+			if (result == CORRECT)
+			{
+				printf(BOLD);
+				printf("                     You win!\n");
+				printf(DEFAULT);
+			}
+			else
+				printf("                 Good guess but no\n\n");
 		}
-		scanf("%6s", temp);
-		
-		if (strlen(temp) != 5)
-		{
-			printf(RED);
-			printf(BOLD);
-			printf("               Wrong length of a word\n\n");
-			printf(DEFAULT);
-			continue ;
-		}
-		if (!is_word(*data->words, temp))
-		{
-			printf(RED);
-			printf(BOLD);
-			printf("\n               Not a word\n\n");
-			printf(DEFAULT);
-			continue ;
-		}
-		tries++;
-		new = newChecker(NULL, NULL, NULL);
-		check_word(data->todays_word, temp, new);
-		checkerAddBack(data->checker, new);
-		head = *data->checker;
-		while (i < tries)
-		{
-			printWord(head);
-			head = head->next;
-			i++;
-		}
+		i = 0;
+		printf("tries: %d\n", tries);
+		word_printer(head, tries);
 		while (i < 6)
 		{
-			printf("                     _ _ _ _ _  \n\n");	
+			printf("\n                   _  _  _  _  _  \n");	
 			i++;
 		}
-		if (check_word(data->todays_word, temp, new) == CORRECT)
-			return (printf(BOLD), printf("                      You win!\n"), printf(DEFAULT), 0);
+		if (tries != 0 && !error && result == CORRECT)
+			return (printf(BOLD), printf("\n               Hope you enjoyed! "), printf(DEFAULT), 0);
+		if (tries == 0)
+			printf("\n               Guess the word: ");
+		else
+			printf("\n                Try again lol: ");
+		scanf("%6s", temp);
 	}	
-	return (printf("\n             No attempts left\n"));
+	return (printf(BOLD), printf("\n                    Game Over!\n"), printf(DEFAULT));
+}
+
+void word_printer(t_checker *head, int tries)
+{
+	int i = 0;
+	while (i < tries)
+	{
+		printWord(head);
+		head = head->next;
+		i++;
+	}
 }
