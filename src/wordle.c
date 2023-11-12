@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 09:54:55 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 11:14:24 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(void)
 
 	if (readFile(&data))
 		return (1);
-	printWordle();
 	getTodaysWord(&data);
 	playGame(&data);
 	wipe(&data);

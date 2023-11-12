@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 09:45:14 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 12:07:46 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ void		getTodaysWord(t_data *data);
 void		freeWords(t_words **wordsList);
 int			check_word(char *word, char *guess, t_checker *node);
 int			is_word(t_words *words, char *str);
+
+void		word_printer(t_checker *head, int tries);
 
 #endif

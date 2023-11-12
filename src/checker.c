@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/12 10:53:11 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 11:52:46 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	check_misplaced(t_checker *a)
 
 int	check_word(char *word, char *guess, t_checker *node)
 {
+	if (!guess || !node)
+		return (1);
 	node->color = NULL;
 	node->word = NULL;
 	node->guess = NULL;
@@ -75,7 +77,5 @@ int	check_word(char *word, char *guess, t_checker *node)
 	if (check_correct(node))
 		return (CORRECT);
 	check_misplaced(node);
-	if (check_correct(node)) //can it be correct here?
-		return (CORRECT);
 	return (0);
 }
