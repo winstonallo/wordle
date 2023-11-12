@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 12:11:07 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 13:21:51 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	playGame(t_data *data)
 		i = 0;
 		printf("tries: %d\n", tries);
 		word_printer(head, tries);
-		while (i < 6)
+		while (i < 6 - tries)
 		{
 			printf("\n                   _  _  _  _  _  \n");	
 			i++;
@@ -159,8 +159,10 @@ int	playGame(t_data *data)
 			return (printf(BOLD), printf("\n               Hope you enjoyed! "), printf(DEFAULT), 0);
 		if (tries == 0)
 			printf("\n               Guess the word: ");
+		else if (tries == 6)
+			break ;
 		else
-			printf("\n                Try again lol: ");
+			printf("\n                Try again: ");
 		scanf("%6s", temp);
 	}	
 	return (printf(BOLD), printf("\n                    Game Over!\n"), printf(DEFAULT));
