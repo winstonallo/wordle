@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:06:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 21:33:42 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 09:25:01 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	check_word(char *word, char *guess, t_checker *node)
 	if (check_correct(node))
 		return (CORRECT);
 	check_misplaced(node);
-	if (strncmp(node->color, "ggggg", 5) == 0)
+	if (check_correct(node)) //can it be correct here?
 		return (CORRECT);
 	return (0);
 }

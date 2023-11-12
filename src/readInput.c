@@ -6,7 +6,7 @@
 /*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 12:05:57 by jkoupy            #+#    #+#             */
-/*   Updated: 2023/11/11 17:12:00 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 10:03:58 by jkoupy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,4 @@ int	is_word(t_words *words, char *str)
 		words = words->next;
 	}
 	return (0);
-}
-
-int	main(void)
-{
-	char	guess[7];
-
-	printf("Guess: ");
-	scanf("%6s", guess);
-	if (strlen(guess) != 5)
-		printf("wrong length\n");
-	if (!is_word(data.words, guess))
-		printf("not a word\n");
-	printf("%s\n", guess);
 }

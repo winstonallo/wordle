@@ -9,6 +9,7 @@ SRCS = 	${SRC_DIR}wordle.c \
 		${SRC_DIR}checker.c \
 		${SRC_DIR}game.c \
 		${SRC_DIR}getTodaysWord.c \
+		${SRC_DIR}readInput.c \
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
