@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wordle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 09:54:55 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 12:04:15 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	wipe(t_data *data)
 {
 	freeWords(data->words);
+	freeChecker(data->checker);
 }
 
 int	main(void)

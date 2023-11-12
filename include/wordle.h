@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wordle.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkoupy <jkoupy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:59 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 09:45:14 by jkoupy           ###   ########.fr       */
+/*   Updated: 2023/11/12 12:02:44 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			readFile(t_data *data);
 int			printWord(t_checker *node);
 void		getTodaysWord(t_data *data);
 void		freeWords(t_words **wordsList);
+void		freeChecker(t_checker **checker);
 int			check_word(char *word, char *guess, t_checker *node);
 int			is_word(t_words *words, char *str);
 

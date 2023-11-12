@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 11:46:54 by arthur           ###   ########.fr       */
+/*   Updated: 2023/11/12 12:06:18 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,25 @@ static void	checkerAddBack(t_checker **lst, t_checker *new_node)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = new_node;
+}
+
+void	freeChecker(t_checker **checker)
+{
+	t_checker	*head;
+	t_checker	*temp;
+
+	head = *checker;
+	while (head)
+	{
+		temp = head;
+		if (head->color)
+			free(head->color);
+		if (head->guess)
+			free(head->guess);
+		head = head->next;
+		free(temp);
+	}
+	free(checker);
 }
 
 int	printWord(t_checker *node)
