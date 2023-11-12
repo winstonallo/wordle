@@ -6,17 +6,14 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:42:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 23:33:28 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/12 23:38:50 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wordle.h"
-#include <bits/pthreadtypes.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
-
-int	ctrlcpress = 0;
 
 void	wipe(t_data *data)
 {

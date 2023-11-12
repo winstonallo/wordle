@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 11:46:44 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/11/12 23:36:27 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/11/12 23:38:35 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,6 @@ void	printProgress(t_checker *head, int tries)
 
 int	youWin(t_checker *head, int tries)
 {
-	int	i;
-
-	i = 0;
 	printProgress(head, tries);
 	printf(BOLD);
 	printf("\n                🎉🎉 You win! 🎉🎉\n\n");
